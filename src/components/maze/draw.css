@@ -5,8 +5,12 @@
   border-color: #11111199;
 }
 .space {
-  background: dodgerblue;
-  opacity: 0.4;
+  background: #1e90ff56;
+}
+.other {
+  text-align: center;
+  background: #1e90ffc2;
+  color: white;
 }
 .wall {
   background: black;

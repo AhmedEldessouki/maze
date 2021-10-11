@@ -1,5 +1,6 @@
 import React from "react";
 import { mazes } from "../../data/mazes";
+import { esc } from "../../utils/solve";
 import Draw from "./draw";
 
 const mazeArray: string[][][] = mazes.map((maze) =>
@@ -14,8 +15,7 @@ function Maze() {
           className="center"
           style={{ gap: "10px", flexDirection: "column" }}
         >
-          <h1>Maze {i + 1}</h1>
-          <Draw maze={item} />
+          <Draw maze={item} i={i} />
         </div>
       ))}
     </div>
