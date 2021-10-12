@@ -1,15 +1,17 @@
 import React from "react";
 import { mazes } from "../../data/mazes";
-import { esc } from "../../utils/solve";
 import Draw from "./draw";
 
 const mazeArray: string[][][] = mazes.map((maze) =>
   maze.map((row) => row.split(""))
 );
 function Maze() {
-  const [mazes, setMazes] = React.useState(mazeArray);
+  const [mazes] = React.useState(mazeArray);
   return (
-    <div className="center" style={{ gap: "10px", flexDirection: "column" }}>
+    <div
+      className="center"
+      style={{ gap: "10px", flexDirection: "column", padding: "2rem" }}
+    >
       {mazes.map((item, i) => (
         <div
           className="center"
