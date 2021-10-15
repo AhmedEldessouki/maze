@@ -1,4 +1,6 @@
 import React from "react";
+import { printMovements } from "../../utils/solve";
+import { mazify } from "../../utils/ps";
 import "./draw.css";
 
 type SomeType =
@@ -261,7 +263,7 @@ function Draw({ maze, i }: { maze: Array<Array<string>>; i: number }) {
               }
             }
             if (
-              from[0] + 1 < solvedMaze[0].length &&
+              from[0] + 1 < solvedMaze.length &&
               solvedMaze[from[0] + 1][from[1]] === " "
             ) {
               if (!(JSON.stringify(solvedMaze) in memo)) {
@@ -727,7 +729,10 @@ function Draw({ maze, i }: { maze: Array<Array<string>>; i: number }) {
   };
 
   return (
-    <div className="center" style={{ width: "500px", flexDirection: "column" }}>
+    <div
+      className="center"
+      style={{ flexDirection: "column", padding: "20px" }}
+    >
       <div className="center" style={{ flexDirection: "row", gap: "20px" }}>
         <h1>Maze {i + 1}</h1>
         <button
@@ -737,14 +742,30 @@ function Draw({ maze, i }: { maze: Array<Array<string>>; i: number }) {
             fontSize: "1rem",
             fontWeight: "bold",
           }}
-          onClick={handleClick}
+          onClick={() => {
+            const moves: string[] = printMovements(solvedMaze);
+            const zzz = mazify(solvedMaze);
+            console.log(moves, zzz);
+            handleClick();
+          }}
         >
           Solve
         </button>
       </div>
-      <div className="center" style={{ flexDirection: "column" }}>
+      <div
+        style={{
+          flexDirection: "column",
+          overflow: "auto",
+          alignItems: "flex-start",
+          display: "flex",
+          justifyContent: "center",
+          margin: "1rem",
+          width: "90vw",
+        }}
+      >
         {solvedMaze.map((row, r) => (
           <div
+            key={r}
             className="center"
             style={{
               flexDirection: "row",
@@ -753,11 +774,13 @@ function Draw({ maze, i }: { maze: Array<Array<string>>; i: number }) {
           >
             {row.map((col, c) => {
               return col === "#" ? (
-                <div className="size wall"></div>
+                <div key={c * 200} className="size wall"></div>
               ) : col === " " ? (
-                <div className="size space"></div>
+                <div key={c * 200} className="size space"></div>
               ) : (
-                <div className="size other">{col}</div>
+                <div key={c * 200} className="size other">
+                  {col}
+                </div>
               );
             })}
           </div>

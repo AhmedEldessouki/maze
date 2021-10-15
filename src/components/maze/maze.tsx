@@ -14,8 +14,13 @@ function Maze() {
     >
       {mazes.map((item, i) => (
         <div
+          key={i * 211}
           className="center"
-          style={{ gap: "10px", flexDirection: "column" }}
+          style={{
+            gap: "10px",
+            flexDirection: "column",
+            alignItems: `flex-start`,
+          }}
         >
           <Draw maze={item} i={i} />
         </div>
